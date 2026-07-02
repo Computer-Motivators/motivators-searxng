@@ -2,7 +2,7 @@ general:
   # Debug mode, only for development. Is overwritten by ${SEARXNG_DEBUG}
   debug: false
   # displayed name
-  instance_name: "SearXNG"
+  instance_name: "Computer Motivators Search"
   # For example: https://example.com/privacy
   privacypolicy_url: false
   # use true to use your own donation page written in searx/info/en/donate.md
@@ -27,19 +27,17 @@ brand:
   #   links:
   #     Uptime: https://uptime.searxng.org/history/darmarit-org
   #     About: "https://searxng.org"
-  # pwa_colors:
-  #   # Custom settings for PWA icon an colors used in manifest.json
-  #   # Default colors are:
-  #    theme_color_light: "#3050ff"
-  #    background_color_light: "fff"
-  #    theme_color_dark: "#58f"
-  #    background_color_dark: "#222428"
-  #    theme_color_black: "#3050ff"
-  #    background_color_black: "#000"
+  pwa_colors:
+    theme_color_light: "#8E3833"
+    background_color_light: "#F8F9FA"
+    theme_color_dark: "#8E3833"
+    background_color_dark: "#242424"
+    theme_color_black: "#8E3833"
+    background_color_black: "#000"
 
 search:
   # Filter results. 0: None, 1: Moderate, 2: Strict
-  safe_search: 0
+  safe_search: 2
   # Existing autocomplete backends: "360search", "baidu", "bing", "brave", "dbpedia", "duckduckgo", "google",
   # "yandex", "privacywall", "mwmbl", "naver", "seznam", "sogou", "startpage", "swisscows", "quark", "qwant",
   # "wikipedia" - leave blank to turn it off by default.
@@ -104,7 +102,7 @@ server:
 
   secret_key: "ultrasecretkey"  # Is overwritten by ${SEARXNG_SECRET}
   # Proxy image results through SearXNG. Is overwritten by ${SEARXNG_IMAGE_PROXY}
-  image_proxy: false
+  image_proxy: true
   # 1.0 and 1.1 are supported
   http_protocol_version: "1.0"
   # POST queries are "more secure!" but are also the source of hard-to-locate
@@ -135,7 +133,7 @@ ui:
   # ui theme
   default_theme: simple
   # center the results ?
-  center_alignment: false
+  center_alignment: true
   # URL prefix of the internet archive, don't forget trailing slash (if needed).
   # cache_url: "https://webcache.googleusercontent.com/search?q=cache:"
   # Default interface locale - leave blank to detect from browser information or
@@ -249,7 +247,7 @@ plugins:
     active: true
 
   searx.plugins.oa_doi_rewrite.SXNGPlugin:
-    active: false
+    active: true
 
   searx.plugins.tor_check.SXNGPlugin:
     active: false
@@ -374,6 +372,7 @@ engines:
     disabled: true
 
   - name: astrophysics data system
+    disabled: true
     engine: astrophysics_data_system
     shortcut: ads
     # read https://docs.searxng.org/dev/engines/online/astrophysics_data_system.html
@@ -422,6 +421,7 @@ engines:
 
   # Requires Tor
   - name: ahmia
+    disabled: true
     engine: ahmia
     # Might do up to two requests to perform a search.
     # Since Tor is already slow by nature, the timeout is set very high.
@@ -463,6 +463,7 @@ engines:
     categories: [it, software wikis]
 
   - name: artic
+    disabled: true
     engine: artic
     shortcut: arc
     timeout: 4.0
@@ -495,6 +496,7 @@ engines:
       results: HTML
 
   - name: azure
+    disabled: true
     engine: azure
     shortcut: az
     categories: [it, cloud]
@@ -509,6 +511,7 @@ engines:
   #   shortcut: bs
 
   - name: bandcamp
+    disabled: true
     engine: bandcamp
     shortcut: bc
     categories: music
@@ -553,16 +556,19 @@ engines:
     # base_url: https://cn.bing.com  # for instances hosted in China
 
   - name: bing images
+    disabled: true
     engine: bing_images
     shortcut: bii
     # base_url: https://cn.bing.com  # for instances hosted in China
 
   - name: bing news
+    disabled: true
     engine: bing_news
     shortcut: bin
     # base_url: https://cn.bing.com  # for instances hosted in China
 
   - name: bing videos
+    disabled: true
     engine: bing_videos
     shortcut: biv
     # base_url: https://cn.bing.com  # for instances hosted in China
@@ -636,6 +642,7 @@ engines:
   #   disabled: true
 
   - name: chefkoch
+    disabled: true
     engine: chefkoch
     shortcut: chef
     # to show premium or plus results too:
@@ -675,6 +682,7 @@ engines:
       results: JSON
 
   - name: cloudflareai
+    disabled: true
     engine: cloudflareai
     shortcut: cfai
     # get api token and accont id from https://developers.cloudflare.com/workers-ai/get-started/rest-api/
@@ -727,6 +735,7 @@ engines:
     disabled: true
 
   - name: currency
+    disabled: true
     engine: currency_convert
     shortcut: cc
 
@@ -741,11 +750,13 @@ engines:
     disabled: true
 
   - name: deviantart
+    disabled: true
     engine: deviantart
     shortcut: da
     timeout: 3.0
 
   - name: devicons
+    disabled: true
     engine: devicons
     shortcut: di
     timeout: 3.0
@@ -764,6 +775,7 @@ engines:
   #   disabled: true
 
   - name: docker hub
+    disabled: true
     engine: docker_hub
     shortcut: dh
     categories: [it, packages]
@@ -807,6 +819,7 @@ engines:
       results: HTML
 
   - name: elasticsearch
+    disabled: true
     shortcut: els
     engine: elasticsearch
     # base_url: http://localhost:9200
@@ -911,6 +924,7 @@ engines:
     disabled: true
 
   - name: etymonline
+    disabled: true
     engine: xpath
     paging: true
     search_url: https://etymonline.com/search?page={pageno}&q={query}
@@ -929,6 +943,7 @@ engines:
       results: HTML
 
   - name: ebay
+    disabled: true
     engine: ebay
     shortcut: eb
     base_url: 'https://www.ebay.com'
@@ -1024,11 +1039,13 @@ engines:
     disabled: true
 
   - name: flickr
+    disabled: true
     categories: images
     shortcut: fl
     engine: flickr_noapi
 
   - name: flickr_api
+    disabled: true
     # You can use the engine using the official stable API, but you need an API
     # key, see: https://www.flickr.com/services/apps/create/
     engine: flickr
@@ -1050,6 +1067,7 @@ engines:
       wikidata_id: Q2470288
 
   - name: freesound
+    disabled: true
     engine: freesound
     shortcut: fnd
     timeout: 15.0
@@ -1116,10 +1134,12 @@ engines:
     disabled: true
 
   - name: genius
+    disabled: true
     engine: genius
     shortcut: gen
 
   - name: gentoo
+    disabled: true
     engine: mediawiki
     shortcut: ge
     categories: ["it", "software wikis"]
@@ -1155,6 +1175,7 @@ engines:
     shortcut: gh
 
   - name: github code
+    disabled: true
     engine: github_code
     shortcut: ghc
     inactive: true
@@ -1197,18 +1218,22 @@ engines:
     disabled: true
 
   - name: google
+    disabled: true
     engine: google
     shortcut: go
 
   - name: google images
+    disabled: true
     engine: google_images
     shortcut: goi
 
   - name: google news
+    disabled: true
     engine: google_news
     shortcut: gon
 
   - name: google videos
+    disabled: true
     engine: google_videos
     shortcut: gov
 
@@ -1297,6 +1322,7 @@ engines:
     timeout: 6.0
 
   - name: hoogle
+    disabled: true
     engine: xpath
     search_url: https://hoogle.haskell.org/?hoogle={query}
     results_xpath: '//div[@class="result"]'
@@ -1431,6 +1457,7 @@ engines:
     disabled: true
 
   - name: kickass
+    disabled: true
     engine: kickass
     base_url:
       - https://kickasstorrents.to
@@ -1475,6 +1502,7 @@ engines:
     shortcut: lepo
 
   - name: lemmy comments
+    disabled: true
     engine: lemmy
     network: lemmy communities
     lemmy_type: Comments
@@ -1514,6 +1542,7 @@ engines:
     disabled: true
 
   - name: libretranslate
+    disabled: true
     engine: libretranslate
     # https://github.com/LibreTranslate/LibreTranslate?tab=readme-ov-file#mirrors
     base_url:
@@ -1523,6 +1552,7 @@ engines:
     inactive: true
 
   - name: lingva
+    disabled: true
     engine: lingva
     shortcut: lv
     timeout: 6.0
@@ -1549,6 +1579,7 @@ engines:
       results: HTML
 
   - name: lucide
+    disabled: true
     engine: lucide
     shortcut: luc
     timeout: 3.0
@@ -1708,6 +1739,7 @@ engines:
     disabled: true
 
   - name: mankier
+    disabled: true
     engine: json_engine
     search_url: https://www.mankier.com/api/v2/mans/?q={query}
     results_query: results
@@ -1734,6 +1766,7 @@ engines:
     disabled: true
 
   - name: openairedatasets
+    disabled: true
     engine: json_engine
     paging: true
     search_url: https://api.openaire.eu/search/datasets?format=json&page={pageno}&size=10&title={query}
@@ -1754,6 +1787,7 @@ engines:
       results: JSON
 
   - name: openairepublications
+    disabled: true
     engine: json_engine
     paging: true
     search_url: https://api.openaire.eu/search/publications?format=json&page={pageno}&size=10&title={query}
@@ -1849,12 +1883,14 @@ engines:
       results: JSON
 
   - name: pdbe
+    disabled: true
     engine: pdbe
     shortcut: pdb
     # Hide obsolete PDB entries.  Default is not to hide obsolete structures
     #  hide_obsolete: false
 
   - name: pexels
+    disabled: true
     engine: pexels
     shortcut: pe
 
@@ -1868,10 +1904,12 @@ engines:
     disabled: true
 
   - name: pinterest
+    disabled: true
     engine: pinterest
     shortcut: pin
 
   - name: piped
+    disabled: true
     engine: piped
     shortcut: ppd
     categories: videos
@@ -1887,6 +1925,7 @@ engines:
       - https://api.piped.private.coffee
 
   - name: piped.music
+    disabled: true
     engine: piped
     network: piped
     shortcut: ppdm
@@ -1896,6 +1935,7 @@ engines:
     inactive: true
 
   - name: piratebay
+    disabled: true
     engine: piratebay
     shortcut: tpb
     # You may need to change this URL to a proxy if piratebay is blocked in your
@@ -2023,6 +2063,7 @@ engines:
     shortcut: pub
 
   - name: pypi
+    disabled: true
     shortcut: pypi
     engine: pypi
 
@@ -2125,6 +2166,7 @@ engines:
     disabled: true
 
   - name: reuters
+    disabled: true
     engine: reuters
     shortcut: reu
     # https://docs.searxng.org/dev/engines/online/reuters.html
@@ -2309,6 +2351,7 @@ engines:
   #   enable_http: true
 
   - name: springer nature
+    disabled: true
     engine: springer
     shortcut: springer
     timeout: 5
@@ -2441,6 +2484,7 @@ engines:
 
   # Requires Tor
   - name: torch
+    disabled: true
     engine: xpath
     paging: true
     search_url:
@@ -2468,6 +2512,7 @@ engines:
   # public and private indexers directly from SearXNG. More details at:
   # https://docs.searxng.org/dev/engines/online/torznab.html
   - name: Torznab EZTV
+    disabled: true
     engine: torznab
     shortcut: eztv
     # base_url: http://localhost:9117/api/v2.0/indexers/eztv/results/torznab
@@ -2520,6 +2565,7 @@ engines:
   #    shortcut: ud
 
   - name: unsplash
+    disabled: true
     engine: unsplash
     shortcut: us
 
@@ -2569,15 +2615,18 @@ engines:
     disabled: true
 
   - name: yahoo news
+    disabled: true
     engine: yahoo_news
     shortcut: yhn
     inactive: true
 
   - name: youtube
+    disabled: true
     shortcut: yt
     engine: youtube_noapi
 
   - name: youtube_api
+    disabled: true
     # You can use the engine using the official stable API, but you need an API
     # key See: https://console.developers.google.com/project
     engine: youtube_api
@@ -2586,10 +2635,12 @@ engines:
     inactive: true
 
   - name: dailymotion
+    disabled: true
     engine: dailymotion
     shortcut: dm
 
   - name: vimeo
+    disabled: true
     engine: vimeo
     shortcut: vm
 
@@ -2619,6 +2670,7 @@ engines:
       wikidata_id: Q367
 
   - name: wikinews
+    disabled: true
     engine: mediawiki
     shortcut: wn
     categories: [news, wikimedia]
@@ -2665,6 +2717,7 @@ engines:
       wikidata_id: Q13679
 
   - name: wiktionary
+    disabled: true
     engine: mediawiki
     shortcut: wt
     categories: [dictionaries, wikimedia]
@@ -2699,24 +2752,28 @@ engines:
       wikidata_id: Q373
 
   - name: wikicommons.images
+    disabled: true
     engine: wikicommons
     shortcut: wci
     categories: images
     wc_search_type: image
 
   - name: wikicommons.videos
+    disabled: true
     engine: wikicommons
     shortcut: wcv
     categories: videos
     wc_search_type: video
 
   - name: wikicommons.audio
+    disabled: true
     engine: wikicommons
     shortcut: wca
     categories: music
     wc_search_type: audio
 
   - name: wikicommons.files
+    disabled: true
     engine: wikicommons
     shortcut: wcf
     categories: files
@@ -2730,6 +2787,7 @@ engines:
     disabled: true
 
   - name: wolframalpha_api
+    disabled: true
     # You can use the engine using the official stable API, but you need an API
     # key.  See: https://products.wolframalpha.com/api/
     engine: wolframalpha_api
@@ -2740,10 +2798,12 @@ engines:
     inactive: true
 
   - name: dictzone
+    disabled: true
     engine: dictzone
     shortcut: dc
 
   - name: mymemory translated
+    disabled: true
     engine: translated
     shortcut: tl
     timeout: 5.0
@@ -2787,6 +2847,7 @@ engines:
     disabled: true
 
   - name: deepl
+    disabled: true
     engine: deepl
     shortcut: dpl
     # You can use the engine using the official stable API, but you need an API key
@@ -2799,7 +2860,6 @@ engines:
     shortcut: mjk
     engine: mojeek
     categories: [general, web]
-    disabled: true
 
   - name: mojeek images
     shortcut: mjkimg
@@ -2888,7 +2948,6 @@ engines:
     # alternatives see: https://instances.joinpeertube.org/instances
     # base_url: https://tube.4aem.com
     categories: videos
-    disabled: true
     timeout: 6.0
 
   - name: mediathekviewweb
@@ -3069,6 +3128,7 @@ engines:
     inactive: true
 
   - name: wordnik
+    disabled: true
     engine: wordnik
     shortcut: wnik
     timeout: 5.0
@@ -3093,6 +3153,7 @@ engines:
       results: HTML
 
   - name: tootfinder
+    disabled: true
     engine: tootfinder
     shortcut: toot
 
@@ -3128,6 +3189,7 @@ engines:
     disabled: true
 
   - name: wallhaven
+    disabled: true
     engine: wallhaven
     # api_key: abcdefghijklmnopqrstuvwxyz
     shortcut: wh
@@ -3154,6 +3216,7 @@ engines:
       results: HTML
 
   - name: wttr.in
+    disabled: true
     engine: wttr
     shortcut: wttr
     timeout: 9.0
@@ -3193,6 +3256,7 @@ engines:
       results: HTML
 
   - name: braveapi
+    disabled: true
     engine: braveapi
     # read https://docs.searxng.org/dev/engines/online/brave.html
     api_key: ""
@@ -3222,6 +3286,7 @@ engines:
     brave_category: videos
 
   - name: brave.news
+    disabled: true
     engine: brave
     network: brave
     shortcut: brnews

@@ -38,11 +38,11 @@ table {
   input[type="text"] {
     width: 13.25rem;
     color: var(--color-toolkit-input-text-font);
-    border: none;
-    background: none repeat scroll 0 0 var(--color-toolkit-select-background);
+    border: 1px solid var(--cm-surface-border);
+    background: var(--color-toolkit-select-background);
     padding: 0.2rem 0.4rem;
     height: 2rem;
-    .rounded-corners-tiny;
+    border-radius: var(--cm-radius);
 
     &:hover,
     &:focus {
@@ -201,19 +201,32 @@ table {
   }
 
   div.selectable_url {
+    height: auto;
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+
     pre {
       width: 100%;
+      max-width: 100%;
+      white-space: pre-wrap;
+      word-break: break-all;
+      overflow-wrap: anywhere;
+      float: none;
     }
   }
 
   #copy-hash-container {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 0.5rem;
 
     div.selectable_url {
+      flex: 1 1 auto;
+      min-width: 0;
+
       pre {
-        width: auto;
+        width: 100%;
         flex-grow: 1;
       }
     }

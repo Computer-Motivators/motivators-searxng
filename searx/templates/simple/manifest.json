@@ -3,9 +3,9 @@
   "short_name": "{{ instance_name }}",
   "icons": [
     {
-      "src": "{{ url_for('static', filename='img/favicon.svg', _external=True) }}",
-      "sizes": "any",
-      "type": "image/svg+xml"
+      "src": "{{ url_for('static', filename='img/favicon.png', _external=True) }}",
+      "sizes": "32x32",
+      "type": "image/png"
     },
     {
       "src": "{{ url_for('static', filename='img/192.png', _external=True) }}",

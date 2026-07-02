@@ -3,6 +3,7 @@
 // stylelint-disable no-descending-specificity
 
 @import (inline) "../../node_modules/normalize.css/normalize.css";
+@import "cm-fonts.less";
 @import "definitions.less";
 @import "mixins.less";
 @import "toolkit.less";
@@ -13,6 +14,7 @@
 @import "stats.less";
 @import "result_templates.less";
 @import "weather.less";
+@import "cm-components.less";
 
 // for index.html template
 @import "index.less";
@@ -49,16 +51,27 @@
 
 // Main LESS-Code
 html {
-  font-family: sans-serif;
-  font-size: 0.9em;
+  font-family: var(--cm-font-body);
+  font-size: var(--cm-font-size-base);
+  line-height: var(--cm-line-height);
   .text-size-adjust;
 
   color: var(--color-base-font);
   background-color: var(--color-base-background);
+  background-image: var(--cm-dot-pattern);
+  background-size: var(--cm-dot-size);
   padding: 0;
   margin: 0;
+  overflow-x: hidden;
 
   scroll-behavior: smooth;
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
 }
 
 body,
@@ -70,20 +83,31 @@ main {
 body {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  min-height: 100vh;
   margin: 0;
+  overflow-x: hidden;
 }
 
 @supports (height: 100dvh) {
   body {
-    height: 100dvh;
+    min-height: 100dvh;
   }
 }
 
 main {
   width: 100%;
   margin-bottom: 2rem;
-  flex: 1;
+  flex: 1 0 auto;
+  min-width: 0;
+}
+
+body.results_endpoint main {
+  margin-bottom: 0;
+  padding-bottom: 1rem;
+}
+
+body.index_endpoint main {
+  margin-bottom: 0;
 }
 
 .page_with_header {
@@ -93,16 +117,32 @@ main {
 
 footer {
   clear: both;
+  flex-shrink: 0;
   min-height: 4rem;
-  padding: 1rem 0;
+  padding: 1rem 1.25rem;
+  padding-bottom: max(1rem, env(safe-area-inset-bottom, 0px));
   width: 100%;
   text-align: center;
   background-color: var(--color-footer-background);
   border-top: 1px solid var(--color-footer-border);
   overflow: hidden;
+  font-family: var(--cm-font-body);
+  box-sizing: border-box;
 
   p {
-    font-size: 0.9em;
+    font-size: 0.875rem;
+    color: var(--cm-text-muted);
+  }
+}
+
+body.index_endpoint {
+  footer {
+    background-color: transparent;
+    background-image: none;
+    border-top: none;
+    box-shadow: none;
+    min-height: auto;
+    padding-top: 1.5rem;
   }
 }
 
@@ -178,10 +218,14 @@ article[data-vim-selected].category-social {
 }
 
 .result {
-  margin: @results-margin 0;
-  padding: @result-padding;
+  margin: 0.65rem 0;
+  padding: 1.25rem 1.35rem;
   box-sizing: border-box;
   width: 100%;
+  background: var(--color-result-background);
+  border: 1px solid var(--color-result-border);
+  border-radius: var(--cm-radius-lg);
+  box-shadow: var(--cm-shadow-card);
   .ltr-border-left(0.2rem solid transparent);
 
   h3 {
@@ -695,9 +739,11 @@ summary.title {
   .infobox {
     margin: 10px 0 10px;
     border: 1px solid var(--color-sidebar-border);
-    padding: 1rem;
+    padding: 1.25rem 1.35rem;
     font-size: 0.9em;
-    .rounded-corners;
+    background: var(--color-sidebar-background);
+    border-radius: var(--cm-radius-lg);
+    box-shadow: var(--cm-shadow-card);
 
     h2 {
       margin: 0 0 0.5em 0;
@@ -791,25 +837,35 @@ summary.title {
 }
 
 #links_on_top {
-  position: absolute;
-  .ltr-right(1rem);
+  position: fixed;
+  .ltr-right(1.25rem);
   .ltr-text-align-right();
-  top: 2.7rem;
+  top: 1rem;
   padding: 0;
+  padding-right: env(safe-area-inset-right, 0px);
   border: 0;
   display: flex;
   align-items: center;
+  justify-content: flex-end;
+  flex-wrap: nowrap;
+  gap: 1em;
   font-size: 1em;
   color: var(--color-search-font);
+  z-index: 1100;
+  max-width: calc(100% - 2rem);
+  box-sizing: border-box;
 
   a {
     display: flex;
     align-items: center;
-    margin-left: 1em;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin: 0;
 
     svg {
       font-size: 1.2em;
       .ltr-margin-right(0.125em);
+      flex-shrink: 0;
     }
   }
 
@@ -857,8 +913,10 @@ summary.title {
   font-size: 1em;
   background: var(--color-backtotop-background);
   position: fixed;
-  bottom: 8rem;
-  .ltr-left(@results-width + @results-offset + (0.5 * @results-gap - 1.2em));
+  bottom: calc(5rem + env(safe-area-inset-bottom, 0px));
+  .ltr-left(auto);
+  .ltr-right(calc(1.25rem + env(safe-area-inset-right, 0px)));
+  z-index: 1000;
   transition: opacity 0.5s;
   opacity: 0;
   pointer-events: none;
@@ -1043,7 +1101,7 @@ summary.title {
 
   #backToTop {
     .ltr-left(auto);
-    .ltr-right(1rem);
+    .ltr-right(calc(1.25rem + env(safe-area-inset-right, 0px)));
   }
 
   #pagination {
@@ -1069,8 +1127,8 @@ summary.title {
   }
 
   #links_on_top {
-    top: 1.4rem;
-    .ltr-right(10px);
+    top: 0.75rem;
+    .ltr-right(calc(0.75rem + env(safe-area-inset-right, 0px)));
   }
 
   #main_index #links_on_top {
@@ -1153,6 +1211,10 @@ summary.title {
       overflow: inherit;
     }
   }
+}
+
+body.results_endpoint #pagination {
+  margin-bottom: 0.75rem;
 }
 
 pre code {

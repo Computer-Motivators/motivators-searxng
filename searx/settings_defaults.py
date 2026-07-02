@@ -191,7 +191,7 @@ SCHEMA: dict[str, t.Any] = {
     },
     'brand': SettingsBrand,
     'search': {
-        'safe_search': SettingsValue((0, 1, 2), 0),
+        'safe_search': SettingsValue((0, 1, 2), 2),
         'autocomplete': SettingsValue(str, ''),
         'autocomplete_min': SettingsValue(int, 4),
         'favicon_resolver': SettingsValue(str, ''),
@@ -217,7 +217,7 @@ SCHEMA: dict[str, t.Any] = {
         'public_instance': SettingsValue(bool, False, 'SEARXNG_PUBLIC_INSTANCE'),
         'secret_key': SettingsValue(str, environ_name='SEARXNG_SECRET'),
         'base_url': SettingsValue((False, str), False, 'SEARXNG_BASE_URL'),
-        'image_proxy': SettingsValue(bool, False, 'SEARXNG_IMAGE_PROXY'),
+        'image_proxy': SettingsValue(bool, True, 'SEARXNG_IMAGE_PROXY'),
         'http_protocol_version': SettingsValue(('1.0', '1.1'), '1.0'),
         'method': SettingsValue(('POST', 'GET'), 'POST', 'SEARXNG_METHOD'),
         'default_http_headers': SettingsValue(dict, {}),
@@ -237,7 +237,7 @@ SCHEMA: dict[str, t.Any] = {
         'theme_args': {
             'simple_style': SettingsValue(SIMPLE_STYLE, 'auto'),
         },
-        'center_alignment': SettingsValue(bool, False),
+        'center_alignment': SettingsValue(bool, True),
         'results_on_new_tab': SettingsValue(bool, False),
         'query_in_title': SettingsValue(bool, False),
         'cache_url': SettingsValue(str, 'https://web.archive.org/web/'),

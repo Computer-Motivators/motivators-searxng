@@ -11,7 +11,17 @@
 
 import type { Config } from "svgo";
 import type { Plugin } from "vite";
-import { type Src2Dest, svg2png, svg2svg } from "./img.ts";
+import { copyImages, type Src2Dest, svg2png, svg2svg } from "./img.ts";
+
+export const plg_copyImages = (items: Src2Dest[]): Plugin => {
+  return {
+    name: "searxng-simple-copy-images",
+    apply: "build",
+    writeBundle: () => {
+      copyImages(items);
+    }
+  };
+};
 
 /**
  * Vite plugin to convert a list of SVG files to PNG.

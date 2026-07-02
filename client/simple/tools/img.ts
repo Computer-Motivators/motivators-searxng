@@ -15,6 +15,17 @@ export type Src2Dest = {
 };
 
 /**
+ * Copy image files to the build output.
+ */
+export const copyImages = (items: Src2Dest[]): void => {
+  for (const item of items) {
+    fs.mkdirSync(path.dirname(item.dest), { recursive: true });
+    fs.copyFileSync(item.src, item.dest);
+    console.log(`[copyImages] copied ${item.dest}`);
+  }
+};
+
+/**
  * Convert a list of SVG files to PNG.
  *
  * @param items - Array of SVG files (src: SVG, dest:PNG) to convert.

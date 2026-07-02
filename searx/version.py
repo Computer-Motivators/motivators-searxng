@@ -66,24 +66,10 @@ def get_git_url_and_branch():
 
 
 def get_git_version() -> tuple[str, str, str]:
-    git_commit_date_hash: str = subprocess_run(r"git show -s --date='format:%Y.%m.%d' --format='%cd+%h'")
-    # Remove leading zero from minor and patch level / replacement of PR-2122
-    # which depended on the git version: '2023.05.06+..' --> '2023.5.6+..'
-    git_commit_date_hash = git_commit_date_hash.replace('.0', '.')
-    tag_version: str = git_commit_date_hash
-    git_version: str = git_commit_date_hash
-    docker_tag: str = git_commit_date_hash.replace("+", "-")
-
-    # add "+dirty" suffix if there are uncommitted changes except searx/settings.yml
-    try:
-        subprocess_run("git diff --quiet -- . ':!searx/settings.yml' ':!utils/brand.env'")
-    except subprocess.CalledProcessError as e:
-        if e.returncode == 1:
-            git_version += "+dirty"
-        else:
-            logger.warning('"%s" returns an unexpected return code %i', e.returncode, e.cmd)
-
-    return git_version, tag_version, docker_tag
+    git_commit_date: str = subprocess_run(r"git show -s --date='format:%Y.%m.%d' --format='%cd'")
+    # Remove leading zero from minor and patch level (2026.07.02 -> 2026.7.2)
+    git_commit_date = git_commit_date.replace('.0', '.')
+    return git_commit_date, git_commit_date, git_commit_date.replace('.', '-')
 
 
 def get_information() -> tuple[str, str, str, str, str]:

@@ -13,7 +13,7 @@ import type { Config } from "svgo";
 import type { UserConfig } from "vite";
 import analyzer from "vite-bundle-analyzer";
 import manifest from "./package.json" with { type: "json" };
-import { plg_svg2png, plg_svg2svg } from "./tools/plg.ts";
+import { plg_copyImages, plg_svg2png, plg_svg2svg } from "./tools/plg.ts";
 
 const ROOT = "../../"; // root of the git repository
 
@@ -27,10 +27,6 @@ const PATH = {
 
 const svg2svg_opts: Config = {
   plugins: [{ name: "preset-default" }, "sortAttrs", "convertStyleToAttrs"]
-};
-
-const svg2svg_favicon_opts: Config = {
-  plugins: [{ name: "preset-default" }, "sortAttrs"]
 };
 
 export default {
@@ -120,23 +116,30 @@ export default {
       svg2svg_opts
     ),
 
-    // SearXNG brand (static)
-    plg_svg2png([
+    // Computer Motivators brand (static)
+    plg_copyImages([
       {
-        src: `${PATH.brand}/searxng-wordmark.svg`,
-        dest: `${PATH.dist}/img/favicon.png`
-      },
-      {
-        src: `${PATH.brand}/searxng.svg`,
-        dest: `${PATH.dist}/img/searxng.png`
+        src: `${PATH.brand}/foreground-mark.png`,
+        dest: `${PATH.dist}/img/foreground-mark.png`
       }
     ]),
 
-    // SearXNG PWA Icons (static)
     plg_svg2png(
       [
         {
-          src: `${PATH.brand}/searxng-wordmark.svg`,
+          src: `${PATH.brand}/foreground-mark.png`,
+          dest: `${PATH.dist}/img/favicon.png`
+        }
+      ],
+      32,
+      32
+    ),
+
+    // PWA Icons (static)
+    plg_svg2png(
+      [
+        {
+          src: `${PATH.brand}/foreground-mark.png`,
           dest: `${PATH.dist}/img/512.png`
         }
       ],
@@ -146,7 +149,7 @@ export default {
     plg_svg2png(
       [
         {
-          src: `${PATH.brand}/searxng-wordmark.svg`,
+          src: `${PATH.brand}/foreground-mark.png`,
           dest: `${PATH.dist}/img/192.png`
         }
       ],
@@ -158,34 +161,8 @@ export default {
     plg_svg2svg(
       [
         {
-          src: `${PATH.brand}/searxng.svg`,
-          dest: `${PATH.dist}/img/searxng.svg`
-        },
-        {
           src: `${PATH.brand}/img_load_error.svg`,
           dest: `${PATH.dist}/img/img_load_error.svg`
-        }
-      ],
-      svg2svg_opts
-    ),
-
-    // -- favicon
-    plg_svg2svg(
-      [
-        {
-          src: `${PATH.brand}/searxng-wordmark.svg`,
-          dest: `${PATH.dist}/img/favicon.svg`
-        }
-      ],
-      svg2svg_favicon_opts
-    ),
-
-    // -- simple templates
-    plg_svg2svg(
-      [
-        {
-          src: `${PATH.brand}/searxng-wordmark.svg`,
-          dest: `${PATH.templates}/searxng-wordmark.min.svg`
         }
       ],
       svg2svg_opts

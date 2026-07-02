@@ -1,8 +1,10 @@
 {% extends "simple/base.html" %}
-{% from 'simple/icons.html' import icon_big %}
+{% from 'simple/elements/logo_lockup.html' import logo_lockup with context %}
 {% block content %}
 <div class="index">
-    <div class="title"><h1>SearXNG</h1></div>
+    <div class="title">{{ logo_lockup('lg', tabindex=none, title=none) }}</div>
+    <div class="index-search-card">
     {% include 'simple/simple_search.html' %}
+    </div>
 </div>
 {% endblock %}

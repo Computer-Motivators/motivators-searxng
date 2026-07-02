@@ -8,16 +8,18 @@
 #search_header {
   padding-top: 1.5em;
   .ltr-padding-right(2em);
-  .ltr-padding-left(@results-offset - 3rem);
+  .ltr-padding-left(@results-offset - @search-logo-column);
   margin: 0;
   background: var(--color-header-background);
   border-bottom: 1px solid var(--color-header-border);
   display: grid;
-  gap: 1rem 1.2rem;
-  grid-template-columns: 3rem 1fr;
+  gap: 1.15rem 1.2rem;
+  grid-template-columns: @search-logo-column 1fr;
   grid-template-areas:
     "logo search"
     "spacer categories";
+  overflow: visible;
+  padding-bottom: 0.85rem;
 }
 
 .category_checkbox,
@@ -100,18 +102,19 @@ button.category_button {
   grid-area: logo;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
+  min-width: @search-logo-column;
+  overflow: visible;
 
-  svg {
-    flex: 1;
-    width: 30px;
-    height: 30px;
-    margin: 0.5rem 0 auto 0;
+  .cm-logo-lockup {
+    padding: 2px 4px;
+    max-width: 100%;
   }
 }
 
 .search_categories {
   grid-area: categories;
+  padding-bottom: 0.35rem;
 
   .help {
     display: none;
@@ -131,6 +134,7 @@ button.category_button {
 #search_view {
   padding: 0.5rem @search-padding-horizontal 0 @search-padding-horizontal;
   grid-area: search;
+  overflow: visible;
 
   body.results_endpoint & {
     padding: 0.5rem 2.8rem 0 0;
@@ -138,13 +142,11 @@ button.category_button {
 }
 
 .search_box {
-  border-radius: 0.8rem;
   width: 100%;
   max-width: @search-width;
   display: inline-flex;
   flex-direction: row;
   white-space: nowrap;
-  box-shadow: var(--color-search-shadow);
 }
 
 #clear_search {
@@ -190,11 +192,19 @@ html.no-js #clear_search.hide_if_nojs {
   width: 100%;
   .ltr-padding-left(1rem);
   .ltr-padding-right(0) !important;
-  .ltr-rounded-left-corners(0.8rem);
+  border-radius: 0;
+}
+
+.search_box #q {
+  .ltr-rounded-left-corners(calc(var(--cm-radius) - 2px));
+}
+
+.search_box #send_search {
+  .ltr-rounded-right-corners(calc(var(--cm-radius) - 2px));
 }
 
 #send_search {
-  .ltr-rounded-right-corners(0.8rem);
+  border-radius: 0;
   padding: 0.8rem;
 
   &:hover {
@@ -239,7 +249,7 @@ html.no-js #clear_search.hide_if_nojs {
     margin-top: 0.6rem;
     .ltr-margin-right(0);
     margin-bottom: 0;
-    .ltr-margin-left(@results-tablet-offset + 3rem);
+    .ltr-margin-left(@results-tablet-offset + @search-logo-column);
   }
 
   #categories {
@@ -366,6 +376,7 @@ html.no-js #clear_search.hide_if_nojs {
 
 #categories {
   .disable-user-select;
+  padding-bottom: 0.35rem;
 }
 
 #categories_container {

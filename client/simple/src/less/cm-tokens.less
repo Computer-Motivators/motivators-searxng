@@ -1,0 +1,98 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+// Computer Motivators design system tokens
+
+:root {
+  --cm-brand: #8e3833;
+  --cm-brand-light: #8e3833;
+  --cm-brand-hover: #762e2a;
+  --cm-brand-darkest: #120706;
+  --cm-accent: #8e3833;
+  --cm-accent-hover: #762e2a;
+  --cm-accent-soft: color-mix(in srgb, #8e3833 12%, transparent);
+  --cm-accent-softer: color-mix(in srgb, #8e3833 6%, transparent);
+  --cm-accent-faint: color-mix(in srgb, #8e3833 4%, transparent);
+
+  --cm-black: #000;
+  --cm-white: #fff;
+  --cm-surface: #f8f9fa;
+  --cm-surface-border: #dee2e6;
+  --cm-hover-bg: #e9ecef;
+  --cm-text: #212529;
+  --cm-text-muted: rgb(33 37 41 / 55%);
+  --cm-link: var(--cm-brand);
+
+  --cm-success: #27ae60;
+  --cm-success-bg: #d4edda;
+  --cm-success-fg: #155724;
+  --cm-danger: #c0392b;
+  --cm-danger-bg: #f8d7da;
+  --cm-danger-fg: #721c24;
+  --cm-warn: #f39c12;
+  --cm-warn-bg: #fff3cd;
+  --cm-warn-fg: #856404;
+  --cm-info: #0c5460;
+  --cm-info-bg: #d1ecf1;
+
+  --cm-font-body: "Ubuntu", -apple-system, blinkmacsystemfont, "Segoe UI", roboto, sans-serif;
+  --cm-font-nav: "Ubuntu", -apple-system, blinkmacsystemfont, "Segoe UI", roboto, sans-serif;
+  --cm-font-mono: "Ubuntu Mono", "Courier New", ui-monospace, monospace;
+
+  --cm-font-size-base: 1rem;
+  --cm-line-height: 1.5;
+
+  --cm-space-xs: 0.5rem;
+  --cm-space-sm: 1rem;
+  --cm-space-md: 1.5rem;
+  --cm-space-lg: 2.5rem;
+  --cm-space-xl: 4rem;
+  --cm-space-xxl: 5rem;
+
+  --cm-radius-sm: 0.5rem;
+  --cm-radius-md: 0.625rem;
+  --cm-radius: 0.75rem;
+  --cm-radius-lg: 1rem;
+  --cm-radius-pill: 999px;
+
+  --cm-shadow-sm: 0 2px 8px rgb(0 0 0 / 6%);
+  --cm-shadow-card: 0 2px 8px rgb(0 0 0 / 6%);
+  --cm-shadow: 0 4px 12px rgb(0 0 0 / 10%);
+  --cm-shadow-lg: 0 10px 25px rgb(0 0 0 / 12%), 0 4px 10px rgb(0 0 0 / 8%);
+
+  --cm-dot-pattern: radial-gradient(circle at 1px 1px, color-mix(in srgb, var(--cm-brand) 18%, transparent) 1px, transparent 1.6px);
+  --cm-dot-size: 18px 18px;
+}
+
+.cm-dark-tokens() {
+  --cm-brand: #8e3833;
+  --cm-brand-light: #c65a52;
+  --cm-brand-hover: #762e2a;
+  --cm-brand-darkest: #0a0a0a;
+  --cm-black: #fff;
+  --cm-white: #1a1a1a;
+  --cm-surface: #242424;
+  --cm-surface-border: #3a3a3a;
+  --cm-text: #e0e0e0;
+  --cm-text-muted: rgb(224 224 224 / 50%);
+  --cm-link: #c65a52;
+  --cm-hover-bg: #2a2a2a;
+  --cm-accent-soft: color-mix(in srgb, #8e3833 22%, transparent);
+  --cm-accent-softer: color-mix(in srgb, #8e3833 12%, transparent);
+  --cm-accent-faint: color-mix(in srgb, #8e3833 8%, transparent);
+  --cm-shadow-sm: 0 2px 8px rgb(0 0 0 / 45%);
+  --cm-shadow-card: 0 2px 8px rgb(0 0 0 / 45%);
+  --cm-shadow: 0 4px 12px rgb(0 0 0 / 25%);
+  --cm-shadow-lg: 0 10px 25px rgb(0 0 0 / 35%), 0 4px 10px rgb(0 0 0 / 20%);
+  --cm-dot-pattern: radial-gradient(circle at 1px 1px, color-mix(in srgb, var(--cm-brand) 36%, transparent) 1px, transparent 1.6px);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root.theme-auto {
+    .cm-dark-tokens();
+  }
+}
+
+:root.theme-dark,
+:root.theme-black {
+  .cm-dark-tokens();
+}

@@ -1,0 +1,7 @@
+{%- macro logo_lockup(size='sm', href=none, tabindex=none, title=none) -%}
+<a class="cm-logo-lockup cm-logo-lockup--{{ size }}" href="{{ href or url_for('index') }}"{% if tabindex is not none %} tabindex="{{ tabindex }}"{% endif %} title="{{ title or _('Display the front page') }}">
+  <img class="cm-logo-lockup__mark" src="{{ url_for('static', filename='img/foreground-mark.png') }}" alt="">
+  <span class="cm-logo-lockup__text">Search</span>
+  <span hidden>Computer Motivators Search</span>
+</a>
+{%- endmacro -%}

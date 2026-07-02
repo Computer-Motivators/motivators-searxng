@@ -3,19 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="endpoint" content="{{ endpoint }}">
-  <meta name="description" content="SearXNG — a privacy-respecting, open metasearch engine">
-  <meta name="keywords" content="SearXNG, search, search engine, metasearch, meta search">
+  <meta name="description" content="{{ instance_name }} — a privacy-respecting, open metasearch engine">
+  <meta name="keywords" content="Computer Motivators, search, search engine, metasearch, meta search">
   <meta name="generator" content="searxng/{{ searxng_version }}">
   <meta name="referrer" content="no-referrer">
   <meta name="robots" content="noarchive">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{% block title %}{% endblock %}{{ instance_name }}</title>
-  <script type="module" src="{{ url_for('static', filename='sxng-core.min.js') }}" client_settings="{{ client_settings }}"></script>
+  <script type="module" src="{{ url_for('static', filename='sxng-core.min.js') }}?v={{ searxng_version|urlencode }}" client_settings="{{ client_settings }}"></script>
   {% block meta %}{% endblock %}
   {% if rtl %}
-  <link rel="stylesheet" href="{{ url_for('static', filename='sxng-rtl.min.css') }}" type="text/css" media="screen">
+  <link rel="stylesheet" href="{{ url_for('static', filename='sxng-rtl.min.css') }}?v={{ searxng_version|urlencode }}" type="text/css" media="screen">
   {% else %}
-  <link rel="stylesheet" href="{{ url_for('static', filename='sxng-ltr.min.css') }}" type="text/css" media="screen">
+  <link rel="stylesheet" href="{{ url_for('static', filename='sxng-ltr.min.css') }}?v={{ searxng_version|urlencode }}" type="text/css" media="screen">
   {% endif %}
   {% if get_setting('server.limiter') or get_setting('server.public_instance') %}
   <link rel="stylesheet" href="{{ url_for('client_token', token=link_token) }}" type="text/css">
@@ -24,8 +24,7 @@
   <link title="{{ instance_name }}" type="application/opensearchdescription+xml" rel="search" href="{{ opensearch_url }}">
   {% endblock %}
   <link rel="icon" href="{{ url_for('static', filename='img/favicon.png') }}" sizes="any">
-  <link rel="icon" href="{{ url_for('static', filename='img/favicon.svg') }}" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="{{ url_for('static', filename='img/favicon.png') }}">
+  <link rel="apple-touch-icon" href="{{ url_for('static', filename='img/192.png') }}">
   <link rel="manifest" href="{{ url_for('manifest') }}" />
 </head>
 <body class="{{ endpoint }}_endpoint" >
@@ -66,7 +65,7 @@
   </main>
   <footer>
     <p>
-    {{ _('Powered by') }} <a href="{{ url_for('info', pagename='about') }}">SearXNG</a> - {{ searxng_version }} — {{ _('a privacy-respecting, open metasearch engine') }}<br>
+    {{ instance_name }} — {{ _('powered by') }} <a href="{{ searxng_git_url }}">SearXNG</a> {{ searxng_version }} — {{ _('a privacy-respecting, open metasearch engine') }}<br>
         <a href="{{ searxng_git_url }}">{{ _('Source code') }}</a>
         | <a href="{{ get_setting('brand.issue_url') }}">{{ _('Issue tracker') }}</a>
         {% if enable_metrics %}| <a href="{{ url_for('stats') }}">{{ _('Engine stats') }}</a>{% endif %}
