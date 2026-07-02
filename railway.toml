@@ -9,8 +9,10 @@
 #   SEARXNG_BIND_ADDRESS    - defaults to :: (all interfaces)
 #   SEARXNG_VALKEY_URL      - valkey://<host>:6379/0 if you add a Valkey service
 #
-# Persistent config: mount a Railway volume at /etc/searxng and place settings.yml there.
-# On first boot the entrypoint seeds settings from the container template.
+# Persistent config/data: attach Railway volumes in the dashboard (Docker VOLUME is not
+# supported). Mount one at /etc/searxng for settings.yml and optionally one at
+# /var/cache/searxng for cache. On first boot the entrypoint seeds settings from
+# the container template.
 
 [build]
 builder = "DOCKERFILE"

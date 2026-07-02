@@ -12,7 +12,7 @@ ENV UV_NATIVE_TLS="true"
 
 ARG TIMESTAMP_VENV="0"
 
-RUN --mount=type=cache,id=uv,target=/root/.cache/uv set -eux -o pipefail; \
+RUN set -eux -o pipefail; \
     export SOURCE_DATE_EPOCH="$TIMESTAMP_VENV"; \
     uv venv; \
     uv pip install --requirements ./requirements.txt --requirements ./requirements-server.txt; \
@@ -79,9 +79,6 @@ ENV __SEARXNG_VERSION="$VERSION" \
     GRANIAN_BLOCKING_THREADS="4" \
     GRANIAN_WORKERS_KILL_TIMEOUT="30s" \
     GRANIAN_BLOCKING_THREADS_IDLE_TIMEOUT="5m"
-
-VOLUME $__SEARXNG_CONFIG_PATH
-VOLUME $__SEARXNG_DATA_PATH
 
 EXPOSE 8080
 
