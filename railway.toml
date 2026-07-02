@@ -1,0 +1,32 @@
+# Railway config for SearXNG (Computer Motivators fork)
+# https://docs.railway.com/config-as-code
+#
+# Required service variables (set in the Railway dashboard):
+#   SEARXNG_SECRET          - random secret for session signing (required in production)
+#   SEARXNG_PORT            - set to ${{PORT}} so the app listens on Railway's assigned port
+#
+# Optional:
+#   SEARXNG_BIND_ADDRESS    - defaults to :: (all interfaces)
+#   SEARXNG_VALKEY_URL      - valkey://<host>:6379/0 if you add a Valkey service
+#
+# Persistent config: mount a Railway volume at /etc/searxng and place settings.yml there.
+# On first boot the entrypoint seeds settings from the container template.
+
+[build]
+builder = "DOCKERFILE"
+dockerfilePath = "container/railway.dockerfile"
+watchPatterns = [
+  "container/**",
+  "requirements*.txt",
+  "searx/**",
+]
+
+[deploy]
+runtime = "V2"
+numReplicas = 1
+# Map Railway's dynamic PORT into SearXNG's env (entrypoint reads SEARXNG_PORT).
+startCommand = "/bin/sh -c 'export SEARXNG_PORT=${PORT:-8080}; exec /usr/local/searxng/entrypoint.sh'"
+healthcheckPath = "/"
+healthcheckTimeout = 300
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 10
