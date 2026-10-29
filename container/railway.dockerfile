@@ -3,7 +3,7 @@
 # pre-tagged local builder image; this file inlines both stages.
 
 # --- Builder stage ---
-FROM ghcr.io/searxng/base:searxng-builder AS builder
+FROM docker.io/searxng/base:searxng-builder AS builder
 
 COPY ./requirements.txt ./requirements-server.txt ./
 
@@ -36,7 +36,7 @@ RUN set -eux -o pipefail; \
     -exec brotli --test {}.br +
 
 # --- Distribution stage ---
-FROM ghcr.io/searxng/base:searxng AS dist
+FROM docker.io/searxng/base:searxng AS dist
 
 COPY --chown=977:977 --from=builder /usr/local/searxng/.venv/ ./.venv/
 COPY --chown=977:977 --from=builder /usr/local/searxng/searx/ ./searx/
